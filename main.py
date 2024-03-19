@@ -23,11 +23,12 @@ async def main():
 
                 subject += " " + chunk["email_subject"]
                 body += " " + chunk['email_body']
-
+            print("Working")
             agent.memory.save_context(inputs={"input": f"{data[0]}"},
                                       outputs={"output": f"{subject}" + "\n" + f"{body}"})
-            agent.generate_summary()
+
             await mess.send()
+            await cl.make_async(agent.generate_summary)()
         else:
             await cl.Message(content="No name exists.").send()
     except Exception as e:
@@ -42,6 +43,7 @@ async def on_message(message: cl.Message):
         agent = cl.user_session.get("agent")
         mess = cl.Message(content="")
         response = lead_status = " "
+        print(agent.summary)
         async for chunk in agent.escalator_agent.astream(
                 {'input': message.content,
                  'chat_history': agent.summary},
