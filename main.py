@@ -12,10 +12,13 @@ async def main():
         agent = Agents()
         name = await cl.AskUserMessage(content="Please Enter your Name", timeout=60).send()
         name = name['output']
+        mess = cl.Message(content="")
         if name and if_exists(str(name)):
             data = return_data(str(name))
-            res = agent.opener_agent.invoke({'input': f"{data[0]}"})
-            await cl.Message(content=f"{res}").send()
+            async for chunk in agent.opener_agent.astream({'input': f"{data[0]}"},
+                                                          config=RunnableConfig(callbacks=[
+                                                              cl.LangchainCallbackHandler(stream_final_answer=True)])):
+                await mess.stream_token(chunk["email_subject"] + "\n" + chunk['email_body'])
         else:
             await cl.Message(content="No name exists.").send()
     except Exception as e:

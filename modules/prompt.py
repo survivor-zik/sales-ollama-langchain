@@ -7,6 +7,7 @@ For each lead, you will be provided with their name, company name, and industry.
 Use this information to personalize the email for them.
 The email should follow these guidelines:
     1.Subject line: Craft a brief subject line that's less than 30 characters and grabs the reader's attention.
+                    Put some good emojis that represent the motive for the email.
     2.Body:   The email body should be no longer than three paragraphs.
             Paragraph 1: Introduce yourself and your company, and express interest in understanding their software needs.
             Paragraph 2: Inquire about the scope and budget they have in mind for their project.
