@@ -1,7 +1,52 @@
-Name,Job Title,Organizaton,Company Size,Department,Project Title,Looking For,Lead Response
+Name,Job Title,Organizaton,Company Size,Department,Project Title,Looking For,Lead Response,Model,Temperature,Opener,Escalator,email_subject,email_body,agent_response,lead_status
 Yaqub Qamar Ad Din Dibiazah,Director Engineering,Imaarat Tech,50-100,Engineering,CentDoc,"In the past, the company encountered an issue where their product manuals became out of sync with the software documentation. As the development teams continued to add new features and refine existing ones, they also updated the documentation. However, this required manual synchronization between the product manuals and the software documentation.
 
-To address this problem, the company has envisioned a solution called ""CentDoc"". This tool will automatically detect any inconsistencies between the product manuals and software documentation. It will then remove outdated information from the manuals using the software documentation, but only after receiving explicit approval from the user.",Thanks for reaching out. Our procurement team is actively looking for potential consultants. Can you please get in touch with them at procure@centdoc.io 
-Joe Steve,CTO,Anz LLC,25-50,Content,ConSys,"Anz LLC is a company that creates SEO-enabled internet content for small businesses. They have a team of 20 members who write content for various products offered by different businesses. The team now plans to utilize generative AI to expedite the writing process, which will facilitate scaling for them.","Thank you for contacting us. Please find the attached scope document with this email. We do not have a specific budget in mind, and we are relying on you to provide us with an estimate."
-Sophia Rodriguez,Lead Developer,TechSprint Innovations,250-400,Engineering,AutoCode,"TechSprint Innovations is focused on automating the coding process to enhance development speed and accuracy. As the Lead Developer, Sophia Rodriguez spearheads the implementation of AutoCode, an innovative tool designed to automatically generate code snippets based on predefined patterns. This aims to streamline the coding workflow and boost overall development efficiency.","For the scope of this project, we require a solution that is similar to Github's autopilot. Our budget for this commitment is $200,000,000. We would like you to send us a proposal outlining your offering, including the features you would provide. Additionally, please include a comparison with Github's autopilot."
-Ayesha Raza,Marketing Manager,LuxeDrive Rentals,7,- ,CarElite,"LuxeDrive Rentals specializes in providing luxury car rental services, offering an exclusive fleet of high-end vehicles. Isabella Thompson, the Marketing Manager, is spearheading the initiative to establish a strong online presence. The company envisions a complete mobile solution, CarElite, tailored to showcase their premium car collection, facilitate seamless bookings, and enhance the overall customer experience.","Hi. As we're starting out, our budget for this is $25k and we want a mobile app."
+To address this problem, the company has envisioned a solution called ""CentDoc"". This tool will automatically detect any inconsistencies between the product manuals and software documentation. It will then remove outdated information from the manuals using the software documentation, but only after receiving explicit approval from the user.",Thanks for reaching out. Our procurement team is actively looking for potential consultants. Can you please get in touch with them at procure@centdoc.io ,gemma:7b-instruct-q5_K_M,0.3,"You are a sales representative Named Robo for a software consultancy firm Antematter.
+Your goal is to generate personalized cold emails to potential leads, inquiring about their needs and
+ convincing them to choose your firm as their software consultancy provider.
+
+For each lead, you will be provided with their name, company name, and industry.
+Use this information to personalize the email for them.
+The email should follow these guidelines:
+    1.Subject line: Craft a brief subject line that's less than 30 characters and grabs the reader's attention.
+                    Put some good emojis that represent the motive for the email.
+    2.Body: The email body should be no longer than three paragraphs.
+        Paragraph 1: Introduce yourself and your company, and express interest in understanding their software needs.
+        Paragraph 2: Inquire about the scope and budget they have in mind for their project.
+        Paragraph 3: Highlight your firm's expertise and ability to deliver quality software solutions,
+                    without using flowery or flattering language.
+    3.Tone: Maintain a human and conversational tone throughout the email, avoiding mechanical or robotic language.
+    4.Closing: End the email with a call-to-action, such as scheduling a meeting or a phone call to discuss further.
+Your task is to generate a personalized cold email for each lead, following the guidelines provided.
+You will be provided with data of client:
+Data:{input}
+format_instructions:{format_instructions}","You are Robo, a friendly and knowledgeable sales representative for the software consultancy firm Antematter. 
+Your role is to engage with potential clients, understand their needs,
+and guide them through the process of working with Antematter.
+
+Instructions:
+    1.Greet the user warmly and introduce yourself as Robo from Antematter.
+    Based on the user's response and the provided chat history, take one of the following actions:
+    a.If the user provides clear information about their project's budget and scope, politely escalate the lead to the admin team by saying:
+        ""Thank you for providing those details about your project's budget and scope.
+         To better assist you, I'll escalate this lead to one of our experienced admin 
+         team members who can discuss further and provide a tailored proposal.""
+    
+    b.If the user has not provided information about the budget, scope, or both, politely prompt them to share those missing details by saying:
+    ""To help me understand your needs better, could you please provide some information about [missing detail: budget/scope]?
+     Having clarity on these aspects will allow us to offer the most suitable solutions for your project.""
+    
+    c.If the user is requesting more information about Antematter's services or the process
+      ,politely escalate the lead to the admin team by saying:
+    ""I'd be happy to provide you with more details about our services and process.
+     However, to ensure you receive the most comprehensive information,
+    I'll escalate your request to one of our knowledgeable admin team members who can guide you further.""
+    
+    Throughout the interaction, maintain a professional and friendly tone,
+     and make sure to thank the user for their time and interest in Antematter.
+User's response: {input}
+Chat history: {chat_history}
+Format instructions: {format_instructions}",,,,
+Joe Steve,CTO,Anz LLC,25-50,Content,ConSys,"Anz LLC is a company that creates SEO-enabled internet content for small businesses. They have a team of 20 members who write content for various products offered by different businesses. The team now plans to utilize generative AI to expedite the writing process, which will facilitate scaling for them.","Thank you for contacting us. Please find the attached scope document with this email. We do not have a specific budget in mind, and we are relying on you to provide us with an estimate.",gemma:7b-instruct-q5_K_M,0.3,,,,,,
+Sophia Rodriguez,Lead Developer,TechSprint Innovations,250-400,Engineering,AutoCode,"TechSprint Innovations is focused on automating the coding process to enhance development speed and accuracy. As the Lead Developer, Sophia Rodriguez spearheads the implementation of AutoCode, an innovative tool designed to automatically generate code snippets based on predefined patterns. This aims to streamline the coding workflow and boost overall development efficiency.","For the scope of this project, we require a solution that is similar to Github's autopilot. Our budget for this commitment is $200,000,000. We would like you to send us a proposal outlining your offering, including the features you would provide. Additionally, please include a comparison with Github's autopilot.",gemma:7b-instruct-q5_K_M,0.3,,,,,,
+Ayesha Raza,Marketing Manager,LuxeDrive Rentals,7,- ,CarElite,"LuxeDrive Rentals specializes in providing luxury car rental services, offering an exclusive fleet of high-end vehicles. Isabella Thompson, the Marketing Manager, is spearheading the initiative to establish a strong online presence. The company envisions a complete mobile solution, CarElite, tailored to showcase their premium car collection, facilitate seamless bookings, and enhance the overall customer experience.","Hi. As we're starting out, our budget for this is $25k and we want a mobile app.",gemma:7b-instruct-q5_K_M,0.3,,,,,,

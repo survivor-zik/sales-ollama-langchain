@@ -4,17 +4,26 @@ from modules.prompt import OPENER, ESCALATOR
 from langchain_core.prompts import PromptTemplate
 from operator import itemgetter
 from langchain.output_parsers import ResponseSchema, StructuredOutputParser
+from typing import Optional
 
 
 class Agents:
-    def __init__(self):
+    def __init__(
+            self,
+            prompt_escalator: Optional[str] = ESCALATOR,
+            prompt_opener: Optional[str] = OPENER,
+            model: Optional[str] = "gemma:7b-instruct-q5_K_M",
+            temperature: Optional[float] = 0.3,
+    ):
         max_tokens = 8192
         self.llm = ChatOllama(
-            model="gemma:7b-instruct-q5_K_M",
-            temperature=0.3,
+            model=model,
+            temperature=temperature,
             num_ctx=max_tokens,
             num_gpu=29,
-            repeat_penalty=1.0)
+            repeat_penalty=1.0,
+        )
+
         response_schemas = [
             ResponseSchema(name="email_subject", description="Subject of the email"),
             ResponseSchema(
@@ -27,35 +36,49 @@ class Agents:
         self.summary = ""
         history = ChatMessageHistory()
         self.memory = ConversationSummaryMemory(llm=self.llm, return_messages=True)
-        self.prompt = PromptTemplate(template=OPENER, input_variables=["input"],
-                                     partial_variables={"format_instructions": format_instructions})
-        self.opener_agent = ({"input": itemgetter("input"),
-                              }
-                             | self.prompt
-                             | self.llm
-                             | output_parser
-                             )
+        self.prompt = PromptTemplate(
+            template=prompt_opener,
+            input_variables=["input"],
+            partial_variables={"format_instructions": format_instructions},
+        )
+        self.opener_agent = (
+                {
+                    "input": itemgetter("input"),
+                }
+                | self.prompt
+                | self.llm
+                | output_parser
+        )
 
         response_schemas_esc = [
-            ResponseSchema(name="lead_status", description="""Explains whether the lead has escalated or not.
-            (Only 2 options Escalated or Not Escalated)"""),
+            ResponseSchema(
+                name="lead_status",
+                description="""Explains whether the lead has escalated or not.
+            (Only 2 options Escalated or Not Escalated)""",
+            ),
             ResponseSchema(
                 name="agent_response",
                 description="The sales representative interacts with the user",
             ),
         ]
-        output_parser = StructuredOutputParser.from_response_schemas(response_schemas_esc)
+        output_parser = StructuredOutputParser.from_response_schemas(
+            response_schemas_esc
+        )
         format_instructions = output_parser.get_format_instructions()
-        self.escalator_prompt = PromptTemplate(template=ESCALATOR, input_variables=["input", "chat_history"],
-                                               partial_variables={"format_instructions": format_instructions})
-        self.escalator_agent = ({
-                                    "input": itemgetter("input"),
-                                    "chat_history": itemgetter("chat_history"),
-                                }
-                                | self.escalator_prompt
-                                | self.llm
-                                | output_parser
-                                )
+        self.escalator_prompt = PromptTemplate(
+            template=prompt_escalator,
+            input_variables=["input", "chat_history"],
+            partial_variables={"format_instructions": format_instructions},
+        )
+        self.escalator_agent = (
+                {
+                    "input": itemgetter("input"),
+                    "chat_history": itemgetter("chat_history"),
+                }
+                | self.escalator_prompt
+                | self.llm
+                | output_parser
+        )
 
     def generate_summary(self):
         messages = self.memory.chat_memory.messages
