@@ -1,6 +1,6 @@
 from langchain_community.chat_models import ChatOllama
 from langchain.memory import ConversationSummaryMemory, ChatMessageHistory
-from modules.prompt import OPENER, ESCALATOR
+from modules.prompt import OPENER, ESCALATOR, SUMMARY_PROMPT
 from langchain_core.prompts import PromptTemplate
 from operator import itemgetter
 from langchain.output_parsers import ResponseSchema, StructuredOutputParser
@@ -34,8 +34,8 @@ class Agents:
         output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
         format_instructions = output_parser.get_format_instructions()
         self.summary = ""
-        history = ChatMessageHistory()
         self.memory = ConversationSummaryMemory(llm=self.llm, return_messages=True)
+        self.memory.prompt = PromptTemplate.from_template(template=SUMMARY_PROMPT)
         self.prompt = PromptTemplate(
             template=prompt_opener,
             input_variables=["input"],

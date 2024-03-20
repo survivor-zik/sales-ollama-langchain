@@ -2,9 +2,14 @@ Name,Job Title,Organizaton,Company Size,Department,Project Title,Looking For,Lea
 Yaqub Qamar Ad Din Dibiazah,Director Engineering,Imaarat Tech,50-100,Engineering,CentDoc,"In the past, the company encountered an issue where their product manuals became out of sync with the software documentation. As the development teams continued to add new features and refine existing ones, they also updated the documentation. However, this required manual synchronization between the product manuals and the software documentation.
 
 To address this problem, the company has envisioned a solution called ""CentDoc"". This tool will automatically detect any inconsistencies between the product manuals and software documentation. It will then remove outdated information from the manuals using the software documentation, but only after receiving explicit approval from the user.",Thanks for reaching out. Our procurement team is actively looking for potential consultants. Can you please get in touch with them at procure@centdoc.io ,gemma:7b-instruct-q5_K_M,0.3,"You are a sales representative Named Robo for a software consultancy firm Antematter.
+Your task is to generate a personalized cold email for each lead, following the guidelines provided.
+Antematter are specialists in solving 
+1.Web3:Performance issues with Web3 applications,High transaction costs on Blockchain
+,Architectural bottlenecks for Web3 applications amd Smart contract UX optimization.
+2.AI: Hallucination issues with Generative AI, Retrieval Issues,High deployment costs for AI
+3.Full-Stack:High costs for cloud infrastructure,Infrastructure monitoring, Technical debt reduction
 Your goal is to generate personalized cold emails to potential leads, inquiring about their needs and
  convincing them to choose your firm as their software consultancy provider.
-
 For each lead, you will be provided with their name, company name, and industry.
 Use this information to personalize the email for them.
 The email should follow these guidelines:
@@ -17,7 +22,8 @@ The email should follow these guidelines:
                     without using flowery or flattering language.
     3.Tone: Maintain a human and conversational tone throughout the email, avoiding mechanical or robotic language.
     4.Closing: End the email with a call-to-action, such as scheduling a meeting or a phone call to discuss further.
-Your task is to generate a personalized cold email for each lead, following the guidelines provided.
+    Your email is contact@antematter.io
+
 You will be provided with data of client:
 Data:{input}
 format_instructions:{format_instructions}","You are Robo, a friendly and knowledgeable sales representative for the software consultancy firm Antematter. 
@@ -46,7 +52,25 @@ Instructions:
      and make sure to thank the user for their time and interest in Antematter.
 User's response: {input}
 Chat history: {chat_history}
-Format instructions: {format_instructions}",,,,
+Format instructions: {format_instructions}",Streamline your product manuals with CentDoc 🤝,"Hi Yaqub Qamar Ad Din Dibiazah,
+
+I'm Robo from Antematter, a software consultancy firm specializing in solving complex challenges faced by businesses in the Web3, AI, and Full-Stack domains. We've been impressed by the vision of your company, Imaarat Tech, and its ambitious project, CentDoc.
+
+We understand that you're facing an issue where your product manuals are becoming out of sync with the software documentation. This is a common problem faced by many companies in the industry, and we're confident that CentDoc can help you address this problem effectively.
+
+CentDoc is a tool that automatically detects inconsistencies between product manuals and software documentation, and removes outdated information without disrupting the user flow. We've helped numerous companies streamline their documentation processes and save valuable time and resources.
+
+We'd love to schedule a call to discuss your project further and explore how Antematter can help you achieve your goals. Please feel free to reach us at contact@antematter.io to schedule a meeting.
+
+Thanks,
+Robo
+Antematter","Hi, Yaqub, I'm Robo from Antematter. I'm reaching out to you about your project, CentDoc, which aims to keep product manuals in sync with software documentation.
+
+I understand that CentDoc has been helping companies save time and resources by eliminating the need for manual synchronization. I'd be happy to schedule a call to discuss the project further and explore how Antematter can help Imaarat Tech achieve its goals.
+
+Would you be interested in scheduling a call with me? Please let me know if you have any specific time preferences.",Not Escalated
 Joe Steve,CTO,Anz LLC,25-50,Content,ConSys,"Anz LLC is a company that creates SEO-enabled internet content for small businesses. They have a team of 20 members who write content for various products offered by different businesses. The team now plans to utilize generative AI to expedite the writing process, which will facilitate scaling for them.","Thank you for contacting us. Please find the attached scope document with this email. We do not have a specific budget in mind, and we are relying on you to provide us with an estimate.",gemma:7b-instruct-q5_K_M,0.3,,,,,,
 Sophia Rodriguez,Lead Developer,TechSprint Innovations,250-400,Engineering,AutoCode,"TechSprint Innovations is focused on automating the coding process to enhance development speed and accuracy. As the Lead Developer, Sophia Rodriguez spearheads the implementation of AutoCode, an innovative tool designed to automatically generate code snippets based on predefined patterns. This aims to streamline the coding workflow and boost overall development efficiency.","For the scope of this project, we require a solution that is similar to Github's autopilot. Our budget for this commitment is $200,000,000. We would like you to send us a proposal outlining your offering, including the features you would provide. Additionally, please include a comparison with Github's autopilot.",gemma:7b-instruct-q5_K_M,0.3,,,,,,
 Ayesha Raza,Marketing Manager,LuxeDrive Rentals,7,- ,CarElite,"LuxeDrive Rentals specializes in providing luxury car rental services, offering an exclusive fleet of high-end vehicles. Isabella Thompson, the Marketing Manager, is spearheading the initiative to establish a strong online presence. The company envisions a complete mobile solution, CarElite, tailored to showcase their premium car collection, facilitate seamless bookings, and enhance the overall customer experience.","Hi. As we're starting out, our budget for this is $25k and we want a mobile app.",gemma:7b-instruct-q5_K_M,0.3,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
