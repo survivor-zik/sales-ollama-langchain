@@ -10,6 +10,7 @@ from modules.agents import Agents
 async def main():
     try:
         agent = Agents()
+        subject = body = ""
         cl.user_session.set("agent", agent)
         name = await cl.AskUserMessage(content="Please Enter your Name", timeout=60).send()
         name = name['output']
@@ -23,7 +24,11 @@ async def main():
                         cl.LangchainCallbackHandler(stream_final_answer=True,
                                                     answer_prefix_tokens=["FINAL", "ANSWER"])])):
                 if "subject" in chunk:
+                    subject += " " + chunk["subject"]
+                    body += " " + chunk['body']
                     await mess.stream_token(chunk["subject"] + "\n" + chunk['body'])
+                    agent.memory.save_context(inputs={"input": mess.content},
+                                              outputs={"output": f"{subject}" + "\n" + f"{body}"})
             await cl.make_async(agent.get_summary)()
         else:
             await cl.Message(content="No name exists.").send()
@@ -41,31 +46,35 @@ async def main():
 async def on_message(message: cl.Message):
     try:
         agent = cl.user_session.get("agent")
-
+        index = cl.user_session.get("index")
         mess = cl.Message(content="")
         response = lead_status = " "
+        output=" "
         print(agent.summary)
         async for chunk in agent.escalator.astream(
                 {'input': message.content,
                  'chat_history': agent.summary},
                 config=RunnableConfig(callbacks=[cl.LangchainCallbackHandler(stream_final_answer=True)])):
-            if 'agent_response' in chunk:
-                await mess.stream_token(chunk["agent_response"])
-                response += " " + chunk["agent_response"]
-                lead_status += " " + chunk["lead_status"]
-
+            print("66", chunk, "66")
+            if 'agent' in chunk:
+                await mess.stream_token(chunk["agent"])
+                response += " " + chunk["agent"]
+                lead_status += " " + chunk["status"]
+            else:
+                await mess.stream_token(chunk['output'])
+                output+=" "+chunk['output']
         await mess.send()
         agent.memory.save_context(inputs={"input": mess.content},
                                   outputs={"output": f"{response}" + "\n" + f"{lead_status}"})
 
-        await cl.make_async(agent.generate_summary)()
-        # add_value_to_column(column_name="lead_status", value=lead_status, index=index)
-        # if lead_status == "Escalated":
-        #     add_value_to_column(column_name="agent_response", value=pd.NA, index=index)
-        #     save_file()
-        # else:
-        #     add_value_to_column(column_name="agent_response", value=response, index=index)
-        #     save_file()
+        await cl.make_async(agent.get_summary)()
+        add_value_to_column(column_name="lead_status", value=lead_status, index=index)
+        if lead_status == "Escalated":
+            add_value_to_column(column_name="agent_response", value=pd.NA, index=index)
+            save_file()
+        elif lead_status=="" and response=="":
+            add_value_to_column(column_name="agent_response", value=response, index=index)
+            save_file()
     except Exception as e:
         await cl.Message(
             content=f"{e}",

@@ -49,12 +49,13 @@ Instructions:
     Throughout the interaction, maintain a professional and friendly tone,
      and make sure to thank the user for their time and interest in Antematter.
 User's response: {input}
-Chat history: {chat_history}
 Thought:{agent_scratchpad}
+Chat history: {chat_history}
 """
 
 SUMMARY_PROMPT = """
-Generate a summary from the content provided, consider that the conversation is between 2 humans.
+You are Robo
+Generate a summary from the content provided, consider that the conversation is between you and a client.
 You have to generate summary considering to follow these majors steps:
 1. Do not remove numbers.
 2. Please preserve the names or nouns from the conversations in the summary.

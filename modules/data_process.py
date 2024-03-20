@@ -4,6 +4,7 @@ from langchain.tools import tool
 import json
 from typing import List
 from langchain_core.agents import AgentActionMessageLog, AgentFinish
+from langchain_core.pydantic_v1 import BaseModel, Field
 
 PATH = "./data/"
 NAME = "leads.csv"
@@ -41,3 +42,12 @@ def parse(output):
         return AgentActionMessageLog(
             tool=name, tool_input=inputs, log="", message_log=[output]
         )
+
+
+class Response(BaseModel):
+    """Final responses to the question being asked and assessing the lead status"""
+    agent: str = Field(description="The answer to query")
+    status: str = Field(
+        description="""Assess the lead if it has escalated or not.
+            (Only 2 options Escalated or Not Escalated)"""
+    )
