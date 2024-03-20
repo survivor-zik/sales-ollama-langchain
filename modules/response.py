@@ -1,4 +1,3 @@
-from typing import List
 from langchain_core.pydantic_v1 import BaseModel, Field
 
 
@@ -9,6 +8,3 @@ class Response(BaseModel):
         description="""The body of the email corresponding to the every individual
                      and designed distinctively for every individual."""
     )
-
-
-
