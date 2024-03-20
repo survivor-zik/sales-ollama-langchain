@@ -28,7 +28,7 @@ def return_data(name: str) -> dict:
     return rows_with_element.to_dict(orient="records")
 
 
-def return_model():
+def return_model() -> tuple:
     model = DATAFRAME["Model"]
     temperature = DATAFRAME["Temperature"]
     opener = DATAFRAME["Opener"]
@@ -36,7 +36,7 @@ def return_model():
     return model[0], temperature[0], opener[0], escalator[0]
 
 
-def add_value_to_column(column_name: str, index: float, value):
+def add_value_to_column(column_name: str, index, value):
     if column_name in DATAFRAME.columns:
         DATAFRAME.loc[index, column_name] = value
     else:
