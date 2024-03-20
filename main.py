@@ -1,8 +1,7 @@
 import chainlit as cl
-from chainlit.input_widget import TextInput
 from langchain_core.runnables import RunnableConfig
-
-from modules.data_process import if_exists, return_data
+import pandas as pd
+from modules.data_process import if_exists, return_data, save_file, add_value_to_column
 from modules.agents import Agents
 
 
@@ -10,6 +9,7 @@ from modules.agents import Agents
 async def main():
     try:
         agent = Agents()
+
         subject = body = ""
         cl.user_session.set("agent", agent)
         name = await cl.AskUserMessage(content="Please Enter your Name", timeout=60).send()
@@ -48,8 +48,8 @@ async def on_message(message: cl.Message):
         agent = cl.user_session.get("agent")
         index = cl.user_session.get("index")
         mess = cl.Message(content="")
-        response = lead_status = " "
-        output=" "
+        response = lead_status = ""
+        output = ""
         print(agent.summary)
         async for chunk in agent.escalator.astream(
                 {'input': message.content,
@@ -62,17 +62,22 @@ async def on_message(message: cl.Message):
                 lead_status += " " + chunk["status"]
             else:
                 await mess.stream_token(chunk['output'])
-                output+=" "+chunk['output']
+                output += " " + chunk['output']
         await mess.send()
         agent.memory.save_context(inputs={"input": mess.content},
                                   outputs={"output": f"{response}" + "\n" + f"{lead_status}"})
 
         await cl.make_async(agent.get_summary)()
-        add_value_to_column(column_name="lead_status", value=lead_status, index=index)
-        if lead_status == "Escalated":
-            add_value_to_column(column_name="agent_response", value=pd.NA, index=index)
+        if len(output) != 0:
+            add_value_to_column(column_name="lead_status", value="Not Escalated", index=index)
+            add_value_to_column(column_name="agent_response", value=output, index=index)
             save_file()
-        elif lead_status=="" and response=="":
+        elif lead_status == "Escalated":
+            add_value_to_column(column_name="agent_response", value=pd.NA, index=index)
+            add_value_to_column(column_name="lead_status", value=lead_status, index=index)
+            save_file()
+        else:
+            add_value_to_column(column_name="lead_status", value=lead_status, index=index)
             add_value_to_column(column_name="agent_response", value=response, index=index)
             save_file()
     except Exception as e:
