@@ -59,7 +59,7 @@ def find_index_by_name(name: str):
         return None
 
 
-def save_file():
+def save_file()-> None:
     DATAFRAME.to_csv(os.path.join(PATH, NAME), index=False)
 
 

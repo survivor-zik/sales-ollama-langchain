@@ -51,7 +51,6 @@ async def on_message(message: cl.Message):
         mess = cl.Message(content="")
         response = lead_status = ""
         output = ""
-        print(agent.summary)
         async for chunk in agent.escalator.astream(
                 {'input': message.content,
                  'chat_history': agent.summary},
@@ -75,10 +74,6 @@ async def on_message(message: cl.Message):
         elif lead_status == "Escalated":
             add_value_to_column(column_name="agent_response", value=None, index=index)
             add_value_to_column(column_name="lead_status", value=lead_status, index=index)
-            save_file()
-        else:
-            add_value_to_column(column_name="lead_status", value=lead_status, index=index)
-            add_value_to_column(column_name="agent_response", value=response, index=index)
             save_file()
     except Exception as e:
         await cl.Message(
