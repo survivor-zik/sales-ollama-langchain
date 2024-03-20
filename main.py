@@ -19,6 +19,7 @@ async def main():
         else:
             await cl.Message(content="No name exists.").send()
     except Exception as e:
+        print(e)
         await cl.Message(
             content=f"{e}",
         ).send()
