@@ -41,5 +41,3 @@ def parse(output):
         return AgentActionMessageLog(
             tool=name, tool_input=inputs, log="", message_log=[output]
         )
-
-def return_agent_prompt(prompt:str,)
