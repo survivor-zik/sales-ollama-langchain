@@ -12,7 +12,6 @@ async def main():
     try:
         subject = body = ""
         model, temperature, opener, escalator = return_model()
-        # print(model, temperature, opener, escalator)
         agent = Agents(model=model, temperature=temperature, prompt_opener=opener, prompt_escalator=escalator)
         cl.user_session.set("agent", agent)
         name = await cl.AskUserMessage(content="Please Enter your Name", timeout=60).send()
