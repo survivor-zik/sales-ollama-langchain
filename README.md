@@ -1,6 +1,6 @@
 # Sales Automation Chat
 
-This project has 2 branches, the main branch has the implementation of this project over open-source LLM, where as
+This project has 2 branches, the **_main_** branch has the implementation of this project over open-source LLM, where as
 agents branch has the implementation over OpenAI gpt3.5-turbo
 
 ## Description:

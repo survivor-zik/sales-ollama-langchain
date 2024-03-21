@@ -1,7 +1,5 @@
 langchain
-chromadb
 fastapi
-sentence-transformers
 python-multipart
 pypdf
 ollama
