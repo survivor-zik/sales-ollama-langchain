@@ -63,15 +63,17 @@ async def on_message(message: cl.Message):
                 await mess.stream_token(chunk['output'])
                 output += " " + chunk['output']
         await mess.send()
-        agent.memory.save_context(inputs={"input": mess.content},
-                                  outputs={"output": f"{response}" + "\n" + f"{lead_status}"})
 
         await cl.make_async(agent.get_summary)()
-        if len(output) > 0:
+        if len(output) > 0 or lead_status == 'Not Escalated':
+            agent.memory.save_context(inputs={"input": mess.content},
+                                      outputs={"output": f"{output}" + "\n" + "Not Escalated"})
             add_value_to_column(column_name="lead_status", value="Not Escalated", index=index)
             add_value_to_column(column_name="agent_response", value=output, index=index)
             save_file()
         elif lead_status == "Escalated":
+            agent.memory.save_context(inputs={"input": mess.content},
+                                      outputs={"output": f"{response}" + "\n" + f"{lead_status}"})
             add_value_to_column(column_name="agent_response", value=None, index=index)
             add_value_to_column(column_name="lead_status", value=lead_status, index=index)
             save_file()
