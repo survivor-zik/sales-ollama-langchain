@@ -1,6 +1,5 @@
 import chainlit as cl
 from langchain_core.runnables import RunnableConfig
-import pandas as pd
 from modules.data_process import (if_exists, return_data, save_file, add_value_to_column,
                                   return_model, find_index_by_name)
 from modules.agents import Agents
