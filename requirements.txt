@@ -1,7 +1,5 @@
 langchain
-chromadb
 fastapi
-sentence-transformers
 python-multipart
 pypdf
 ollama
@@ -10,3 +8,4 @@ torchvision==0.17.0
 torchaudio==2.2.0
 chainlit
 pandas
+langchain-openai
