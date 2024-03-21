@@ -61,7 +61,8 @@ Format instructions: {format_instructions}
 """
 
 SUMMARY_PROMPT = """
-Generate a summary from the content provided, consider that the conversation is between 2 humans.
+You are Robo, a representative at Antematter.
+Generate a summary from the content provided, consider that the conversation is between you and a client.
 You have to generate summary considering to follow these majors steps:
 1. Do not remove numbers.
 2. Please preserve the names or nouns from the conversations in the summary.
